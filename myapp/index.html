@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>THESIS</title>
+		<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+		<script src="lib/leaflet/leaflet.js"></script>
+		<script src="data/coordinate.geojson"></script>
+		<style type="text/css">
+			#map { height : 700px; }
+			
+		</style>
+	</head>
+	<body>
+		<h1>Geolocation</h1>
+
+		<div id="map"></div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+		
+		<script>
+		 var socket = io('http://telnet localhost 8112');
+		 socket.on('connect', function(){});
+		 socket.on('event', function(data){});
+		 socket.on('disconnect', function(){});
+         socket.on('news', function (data) {
+         console.log(data);
+         socket.emit('my data', { my: 'data' });
+         });
+		 
+		
+  		var map = L.map('map').setView([39.984702,116.318417], 11);
+  		mapLink = 
+            '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+        	L.tileLayer(
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; ' + mapLink + ' Contributors',
+            maxZoom: 18,
+            }).addTo(map);
+			
+			L.marker([39.984702,116.318417]).addTo(map) // EDIT latitude, longitude to re-position marker
+  				.bindPopup("Name:User 1, Time:2:54:25"); // EDIT pop-up text message
+  				L.marker([39.985135,116.305834]).addTo(map)
+  				.bindPopup("Name:User 1, Time:2:54:25");
+  				L.marker([39.984523,116.315823]).addTo(map)
+  				.bindPopup("Name:User 1,Time:2:54:25");
+				L.marker([39.984574,116.315611]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:54:30");
+				L.marker([39.984568,116.315407]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:54:30");
+				L.marker([39.984538,116.315148]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:54:40");
+				L.marker([39.984501,116.314907]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:54:45");
+				L.marker([39.984532,116.314808]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:54:50");
+				L.marker([39.984504,116.314625]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:54:55");
+				L.marker([39.984485,116.314426]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:55:00");
+				L.marker([39.984427,116.31424]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:55:05");
+				L.marker([39.984485,116.314042]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:55:10");
+				L.marker([39.98448,116.313818]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:55:15");
+				L.marker([39.984501	,116.313659]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:55:20");
+				L.marker([39.984618,116.314323]).addTo(map)
+				.bindPopup("Name:User 1,Time:2:55:25");
+L.marker(	[	39.984649	,	116.314107	]).addTo(map)
+.bindPopup("Name:User 1,Time:2:55:25");
+L.marker(	[	39.984621	,	116.313941	]).addTo(map)
+.bindPopup("Name:User 1,Time:2:55:35");
+L.marker(	[	39.984655	,	116.313724	]).addTo(map)
+.bindPopup("Name:User 1,Time:2:55:40");
+L.marker(	[	39.984681	,	116.313521	]).addTo(map)
+.bindPopup("Name:User 1,Time:2:55:45");
+L.marker(	[	39.984652	,	116.310854	]).addTo(map)
+.bindPopup("Name:User 1,Time:2:56:55");
+L.marker(	[	39.983509	,	116.299238	]).addTo(map)
+.bindPopup("Name:User 1,Time:3:03:40");
+L.marker(	[	39.983413	,	116.299267	]).addTo(map)
+.bindPopup("Name:User 1,Time:3:03:45");
+L.marker(	[	39.9833	,	116.299314	]).addTo(map)
+.bindPopup("Name:User 1,Time:3:04:00");
+L.marker(	[	39.9833	,	116.299314	]).addTo(map)
+.bindPopup("Name:User 1,Time:3:04:03");
+L.marker(	[	39.983304	,	116.299307	]).addTo(map)
+.bindPopup("Name:User 1,Time:3:04:05");
+L.marker(	[	39.983663	,	116.298932	]).addTo(map)
+.bindPopup("Name:User 1,Time:3:04:45");
+L.marker(	[	39.983533	,	116.298903	]).addTo(map)
+.bindPopup("Name:User 1,Time:3:04:50");
+L.marker(	[	39.984019	,	116.298663	]).addTo(map)
+.bindPopup("Name:User 1,Time:3:05:15");
+L.marker(	[	39.995777	,	116.286798	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:08:07");
+L.marker(	[	39.984789	,	116.300151	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:12:07");
+L.marker(	[	39.984925	,	116.301221	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:12:42");
+L.marker(	[	39.98595	,	116.309978	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:17:12");
+L.marker(	[	39.989029	,	116.309833	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:19:12");
+L.marker(	[	39.989287	,	116.309905	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:19:22");
+L.marker(	[	39.990089	,	116.310169	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:19:57");
+L.marker(	[	39.990219	,	116.310215	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:20:02");
+L.marker(	[	39.990696	,	116.310101	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:20:47");
+L.marker(	[	39.990692	,	116.310092	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:20:57");
+L.marker(	[	39.990874	,	116.310657	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:21:47");
+L.marker(	[	39.990906	,	116.310827	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:21:52");
+L.marker(	[	39.990933	,	116.311149	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:22:02");
+L.marker(	[	39.991063	,	116.31384	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:23:12");
+L.marker(	[	39.991072	,	116.31403	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:23:17");
+L.marker(	[	39.991148	,	116.315193	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:23:47");
+L.marker(	[	39.991176	,	116.315342	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:23:52");
+L.marker(	[	39.991188	,	116.315958	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:24:12");
+L.marker(	[	39.991189	,	116.316172	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:24:17");
+L.marker(	[	39.991187	,	116.317874	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:24:57");
+L.marker(	[	39.991179	,	116.318083	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:25:02");
+L.marker(	[	39.991183	,	116.318691	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:25:17");
+L.marker(	[	39.991258	,	116.320062	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:25:52");
+L.marker(	[	39.991308	,	116.320622	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:26:07");
+L.marker(	[	39.9926	,	116.32281	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:27:47");
+L.marker(	[	39.992777	,	116.322891	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:27:52");
+L.marker(	[	39.993077	,	116.322617	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:28:07");
+L.marker(	[	39.993796	,	116.322579	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:28:32");
+L.marker(	[	39.994175	,	116.322829	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:28:42");
+L.marker(	[	39.996234	,	116.322552	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:29:52");
+L.marker(	[	39.996392	,	116.322481	]).addTo(map)
+.bindPopup("Name:User 1,Time:4:29:57");
+L.marker(	[	40.008921	,	116.321484	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:49:20");
+L.marker(	[	40.008582	,	116.322217	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:49:40");
+L.marker(	[	40.008481	,	116.32244	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:49:45");
+L.marker(	[	40.008982	,	116.321517	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:50:15");
+L.marker(	[	40.00908	,	116.32156	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:51:55");
+L.marker(	[	40.009242	,	116.321445	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:52:56");
+L.marker(	[	40.009187	,	116.32143	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:53:01");
+L.marker(	[	40.009017	,	116.321558	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:53:26");
+L.marker(	[	40.009034	,	116.321569	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:54:11");
+L.marker(	[	40.008995	,	116.321455	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:54:36");
+L.marker(	[	40.009399	,	116.322179	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:56:01");
+L.marker(	[	40.009344	,	116.32219	]).addTo(map)
+.bindPopup("Name:User 1,Time:9:56:06");
+L.marker(	[	40.009336	,	116.321838	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:02:09");
+L.marker(	[	40.008362	,	116.320619	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:05:04");
+L.marker(	[	40.008348	,	116.320573	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:05:09");
+L.marker(	[	40.008163	,	116.320473	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:05:29");
+L.marker(	[	40.007819	,	116.32024	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:06:24");
+L.marker(	[	40.007817	,	116.32023	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:06:29");
+L.marker(	[	40.007834	,	116.320181	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:06:34");
+L.marker(	[	40.006724	,	116.318625	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:27:25");
+L.marker(	[	40.008663	,	116.321249	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:31:25");
+L.marker(	[	40.008684	,	116.321297	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:31:30");
+L.marker(	[	40.009068	,	116.322259	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:45:06");
+L.marker(	[	40.009107	,	116.322177	]).addTo(map)
+.bindPopup("Name:User 1,Time:10:45:11");
+L.marker(	[	39.907006	,	116.370415	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:44:22");
+L.marker(	[	39.906914	,	116.371251	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:22");
+L.marker(	[	39.907414	,	116.370017	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:44:07");
+L.marker(	[	39.907374	,	116.370074	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:44:12");
+L.marker(	[	39.907027	,	116.37036	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:44:17");
+L.marker(	[	39.907006	,	116.370415	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:44:22");
+L.marker(	[	39.907014	,	116.370454	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:44:27");
+L.marker(	[	39.907008	,	116.370534	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:44:32");
+L.marker(	[	39.906936	,	116.370624	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:22");
+L.marker(	[	39.906806	,	116.370794	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:44:42");
+L.marker(	[	39.906793	,	116.370909	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:44:47");
+L.marker(	[	39.906795	,	116.370958	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:44:52");
+L.marker(	[	39.906769	,	116.371029	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:44:57");
+L.marker(	[	39.906813	,	116.371056	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:02");
+L.marker(	[	39.906864	,	116.371095	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:07");
+L.marker(	[	39.906891	,	116.371141	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:12");
+L.marker(	[	39.906896	,	116.371178	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:17");
+L.marker(	[	39.906914	,	116.371251	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:22");
+L.marker(	[	39.9069	,	116.371313	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:27");
+L.marker(	[	39.90691	,	116.371375	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:32");
+L.marker(	[	39.906925	,	116.371432	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:37");
+L.marker(	[	39.906932	,	116.371477	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:42");
+L.marker(	[	39.906959	,	116.371526	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:47");
+L.marker(	[	39.906992	,	116.371584	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:52");
+L.marker(	[	39.907005	,	116.371673	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:45:57");
+L.marker(	[	39.906996	,	116.371748	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:02");
+L.marker(	[	39.906996	,	116.371831	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:07");
+L.marker(	[	39.907018	,	116.371876	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:12");
+L.marker(	[	39.907054	,	116.37189	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:17");
+L.marker(	[	39.907097	,	116.371898	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:22");
+L.marker(	[	39.907154	,	116.371955	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:27");
+L.marker(	[	39.907173	,	116.371999	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:32");
+L.marker(	[	39.907216	,	116.372037	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:37");
+L.marker(	[	39.907228	,	116.372081	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:42");
+L.marker(	[	39.907245	,	116.372126	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:47");
+L.marker(	[	39.90725	,	116.372225	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:52");
+L.marker(	[	39.907234	,	116.372296	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:46:57");
+L.marker(	[	39.907225	,	116.372368	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:02");
+L.marker(	[	39.907199	,	116.372445	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:07");
+L.marker(	[	39.907157	,	116.372502	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:12");
+L.marker(	[	39.907137	,	116.372553	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:17");
+L.marker(	[	39.907194	,	116.372599	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:22");
+L.marker(	[	39.907217	,	116.372634	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:27");
+L.marker(	[	39.907226	,	116.372669	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:32");
+L.marker(	[	39.90725	,	116.372718	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:37");
+L.marker(	[	39.907231	,	116.372796	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:42");
+L.marker(	[	39.907259	,	116.372845	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:47");
+L.marker(	[	39.907261	,	116.372906	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:52");
+L.marker(	[	39.907227	,	116.372973	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:47:57");
+L.marker(	[	39.907225	,	116.373009	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:48:02");
+L.marker(	[	39.907215	,	116.37304	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:48:07");
+L.marker(	[	39.90724	,	116.373096	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:48:12");
+L.marker(	[	39.907294	,	116.373124	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:48:17");
+L.marker(	[	39.907313	,	116.373163	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:48:22");
+L.marker(	[	39.907391	,	116.373175	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:48:27");
+L.marker(	[	39.907422	,	116.373195	]).addTo(map)
+.bindPopup("Name:User 2,Time:13:48:32");
+L.marker(	[	39.994622	,	116.326757	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:54:52");
+L.marker(	[	39.994614	,	116.326751	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:54:54");
+L.marker(	[	39.994602	,	116.326769	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:54:59");
+L.marker(	[	39.994599	,	116.326769	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:04");
+L.marker(	[	39.994599	,	116.326769	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:07");
+L.marker(	[	39.994601	,	116.326765	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:09");
+L.marker(	[	39.994584	,	116.326731	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:14");
+L.marker(	[	39.994593	,	116.326668	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:19");
+L.marker(	[	39.994564	,	116.326612	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:24");
+L.marker(	[	39.994549	,	116.326542	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:29");
+L.marker(	[	39.994551	,	116.32651	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:34");
+L.marker(	[	39.994547	,	116.326425	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:39");
+L.marker(	[	39.994554	,	116.326341	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:44");
+L.marker(	[	39.994609	,	116.326361	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:49");
+L.marker(	[	39.994664	,	116.326391	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:54");
+L.marker(	[	39.994714	,	116.326453	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:55:59");
+L.marker(	[	39.99478	,	116.326489	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:04");
+L.marker(	[	39.994849	,	116.32652	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:09");
+L.marker(	[	39.994911	,	116.326568	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:14");
+L.marker(	[	39.994976	,	116.326634	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:19");
+L.marker(	[	39.995029	,	116.326678	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:24");
+L.marker(	[	39.995096	,	116.326705	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:29");
+L.marker(	[	39.99517	,	116.326729	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:34");
+L.marker(	[	39.995224	,	116.326677	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:39");
+L.marker(	[	39.995287	,	116.326372	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:44");
+L.marker(	[	39.995361	,	116.326374	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:49");
+L.marker(	[	39.995429	,	116.326381	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:54");
+L.marker(	[	39.995472	,	116.326378	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:56:59");
+L.marker(	[	39.995529	,	116.326376	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:57:04");
+L.marker(	[	39.995573	,	116.326343	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:57:09");
+L.marker(	[	39.995616	,	116.326277	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:57:14");
+L.marker(	[	39.995781	,	116.326147	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:57:24");
+L.marker(	[	39.999249	,	116.32586	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:59:09");
+L.marker(	[	39.999392	,	116.325884	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:59:14");
+L.marker(	[	39.999424	,	116.325782	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:59:19");
+L.marker(	[	39.999386	,	116.325578	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:59:24");
+L.marker(	[	39.999343	,	116.325373	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:59:29");
+L.marker(	[	39.999348	,	116.325203	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:59:34");
+L.marker(	[	39.999466	,	116.324843	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:59:44");
+L.marker(	[	39.999545	,	116.324734	]).addTo(map)
+.bindPopup("Name:User 3,Time:11:59:49");
+L.marker(	[	40.007143	,	116.324088	]).addTo(map)
+.bindPopup("Name:User 3,Time:12:03:59");
+L.marker(	[	40.007178	,	116.323881	]).addTo(map)
+.bindPopup("Name:User 3,Time:12:04:04");
+L.marker(	[	40.007227	,	116.323653	]).addTo(map)
+.bindPopup("Name:User 3,Time:12:04:09");
+L.marker(	[	40.008923	,	116.322803	]).addTo(map)
+.bindPopup("Name:User 3,Time:12:05:29");
+L.marker(	[	40.00887	,	116.322512	]).addTo(map)
+.bindPopup("Name:User 3,Time:12:05:34");
+L.marker(	[	40.008815	,	116.32227	]).addTo(map)
+.bindPopup("Name:User 3,Time:12:05:39");
+L.marker(	[	40.008767	,	116.322068	]).addTo(map)
+.bindPopup("Name:User 3,Time:12:05:44");
+L.marker(	[	40.008768	,	116.321916	]).addTo(map)
+.bindPopup("Name:User 3,Time:12:05:49");
+L.marker(	[	40.008796	,	116.321834	]).addTo(map)
+.bindPopup("Name:User 3,Time:12:05:54");
+L.marker(	[	39.907487	,	116.373566	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:49:02");
+L.marker(	[	39.906345	,	116.374616	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:49:07");
+L.marker(	[	39.906211	,	116.375148	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:49:57");
+L.marker(	[	39.906147	,	116.375258	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:50:02");
+L.marker(	[	39.906115	,	116.375911	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:50:57");
+L.marker(	[	39.906112	,	116.3765	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:51:52");
+L.marker(	[	39.906106	,	116.376565	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:51:57");
+L.marker(	[	39.906095	,	116.376628	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:52:02");
+L.marker(	[	39.906056	,	116.377269	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:52:52");
+L.marker(	[	39.906085	,	116.377388	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:53:02");
+L.marker(	[	39.906095	,	116.377438	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:53:07");
+L.marker(	[	39.9061	,	116.377518	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:53:12");
+L.marker(	[	39.906108	,	116.377585	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:53:17");
+L.marker(	[	39.9061	,	116.37765	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:53:22");
+L.marker(	[	39.906091	,	116.377708	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:53:27");
+L.marker(	[	39.90606	,	116.378871	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:54:57");
+L.marker(	[	39.906047	,	116.378924	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:55:02");
+L.marker(	[	39.906022	,	116.378986	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:55:07");
+L.marker(	[	39.906098	,	116.379594	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:55:57");
+L.marker(	[	39.906113	,	116.379642	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:56:02");
+L.marker(	[	39.906114	,	116.380128	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:56:57");
+L.marker(	[	39.906158	,	116.38017	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:57:02");
+L.marker(	[	39.906143	,	116.380873	]).addTo(map)
+.bindPopup("Name:User 4,Time:13:57:57");
+L.marker(	[	39.906232	,	116.383322	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:01:17");
+L.marker(	[	39.906252	,	116.383389	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:01:22");
+L.marker(	[	39.90627	,	116.38345	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:01:27");
+L.marker(	[	39.906346	,	116.384057	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:02:12");
+L.marker(	[	39.906347	,	116.384596	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:02:52");
+L.marker(	[	39.906405	,	116.384829	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:03:17");
+L.marker(	[	39.906396	,	116.384906	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:03:22");
+L.marker(	[	39.906431	,	116.385386	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:03:57");
+L.marker(	[	39.906415	,	116.38544	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:04:02");
+L.marker(	[	39.906429	,	116.386108	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:04:52");
+L.marker(	[	39.906411	,	116.386169	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:04:57");
+L.marker(	[	39.9064	,	116.386229	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:05:02");
+L.marker(	[	39.906421	,	116.386487	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:05:22");
+L.marker(	[	39.906431	,	116.38707	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:05:57");
+L.marker(	[	39.906426	,	116.387104	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:06:02");
+L.marker(	[	39.906412	,	116.387236	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:06:12");
+L.marker(	[	39.906412	,	116.387307	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:06:17");
+L.marker(	[	39.906396	,	116.387713	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:06:47");
+L.marker(	[	39.90642	,	116.387902	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:07:02");
+L.marker(	[	39.906488	,	116.388504	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:08:02");
+L.marker(	[	39.906505	,	116.389117	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:08:52");
+L.marker(	[	39.906521	,	116.389189	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:08:57");
+L.marker(	[	39.906525	,	116.389691	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:09:32");
+L.marker(	[	39.906535	,	116.389733	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:09:37");
+L.marker(	[	39.906575	,	116.389972	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:09:57");
+L.marker(	[	39.906566	,	116.39015	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:10:12");
+L.marker(	[	39.906561	,	116.390298	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:10:27");
+L.marker(	[	39.906511	,	116.391882	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:13:02");
+L.marker(	[	39.906509	,	116.39194	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:13:07");
+L.marker(	[	39.906511	,	116.391997	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:13:12");
+L.marker(	[	39.906521	,	116.392264	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:13:32");
+L.marker(	[	39.906524	,	116.392336	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:13:37");
+L.marker(	[	39.906502	,	116.39241	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:13:42");
+L.marker(	[	39.906511	,	116.392485	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:13:47");
+L.marker(	[	39.905004	,	116.393555	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:18:22");
+L.marker(	[	39.904985	,	116.393576	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:18:27");
+L.marker(	[	39.904728	,	116.393508	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:19:07");
+L.marker(	[	39.904674	,	116.393491	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:19:12");
+L.marker(	[	39.904657	,	116.393522	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:19:17");
+L.marker(	[	39.904546	,	116.393512	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:19:22");
+L.marker(	[	39.904449	,	116.393518	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:19:27");
+L.marker(	[	39.904063	,	116.393474	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:19:57");
+L.marker(	[	39.903996	,	116.393465	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:20:02");
+L.marker(	[	39.903925	,	116.39345	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:20:07");
+L.marker(	[	39.90385	,	116.393436	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:20:12");
+L.marker(	[	39.903541	,	116.39346	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:20:52");
+L.marker(	[	39.903456	,	116.39345	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:20:57");
+L.marker(	[	39.903368	,	116.393431	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:21:02");
+L.marker(	[	39.902543	,	116.393474	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:22:17");
+L.marker(	[	39.902424	,	116.393475	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:22:22");
+L.marker(	[	39.902246	,	116.393545	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:22:37");
+L.marker(	[	39.902178	,	116.39357	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:22:42");
+L.marker(	[	39.902066	,	116.393554	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:22:57");
+L.marker(	[	39.902001	,	116.393531	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:23:02");
+L.marker(	[	39.901532	,	116.393618	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:23:37");
+L.marker(	[	39.901462	,	116.393628	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:23:42");
+L.marker(	[	39.901398	,	116.393572	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:23:47");
+L.marker(	[	39.901372	,	116.393558	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:23:52");
+L.marker(	[	39.90125	,	116.393614	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:24:17");
+L.marker(	[	39.901238	,	116.393612	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:24:22");
+L.marker(	[	39.901184	,	116.393594	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:24:27");
+L.marker(	[	39.901147	,	116.393583	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:24:32");
+L.marker(	[	39.897657	,	116.391234	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:36:52");
+L.marker(	[	39.897675	,	116.391189	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:36:57");
+L.marker(	[	39.897687	,	116.39112	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:37:02");
+L.marker(	[	39.896906	,	116.343324	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:52:32");
+L.marker(	[	39.8964	,	116.343194	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:52:37");
+L.marker(	[	39.896164	,	116.342628	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:52:42");
+L.marker(	[	39.896311	,	116.341556	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:52:47");
+L.marker(	[	39.895494	,	116.321381	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:54:12");
+L.marker(	[	39.895564	,	116.320212	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:54:17");
+L.marker(	[	39.907606	,	116.304866	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:57:07");
+L.marker(	[	39.908973	,	116.30463	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:57:12");
+L.marker(	[	39.909989	,	116.304525	]).addTo(map)
+.bindPopup("Name:User 4,Time:14:57:17");
+L.marker(	[	39.924984	,	116.321619	]).addTo(map)
+.bindPopup("Name:User 4,Time:15:03:37");
+L.marker(	[	39.926426	,	116.320399	]).addTo(map)
+.bindPopup("Name:User 4,Time:15:04:07");
+  				
+  				var customLayer = L.geoJson(null, {
+  				onEachFeature: function(feature, layer) {
+  				layer.bindPopup(feature.properties.Title);
+  				}
+  				});
+  				
+  				
+
+
+				
+		</script>
+	</body>
+</html>
