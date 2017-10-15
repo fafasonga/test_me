@@ -303,7 +303,6 @@ body, html {
 <div id="date"></div>
 <img src="cursor.png" id="cursor" />
 
-<!--<script src="./node_modules/socket.io-client/dist/socket.io.js"></script>-->
 <script src="/socket.io/socket.io.js"></script>
 <script>
 "use strict"; 
@@ -377,9 +376,8 @@ function setup() {
 		dragging: true,
 		keyboard: true,
 		scrollWheelZoom: true,
-		zoomSnap: .000001,
-		mapTypeId: 'satellite',
-	}).setView([39, 116], 4)
+		zoomSnap: .0001,
+	}).setView([39, 116], 20)
 
 	currentMap = L.layerGroup().addTo(map);
 	key = L.layerGroup().addTo(map);
@@ -493,13 +491,13 @@ function addKey() {
 		mapDot[c] = L.divIcon({className: ('mapDot ' + c), iconSize: [3, 3]});
 		unknown[c] = L.divIcon({className: ('unknown'), html: ""});
 
-		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.925, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: false, icon: mapDot[c]});
+		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.925, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: true, icon: mapDot[c]});
 		marker.addTo(key);
-		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.925, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: false, icon: mapDot[c]});
+		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.925, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: true, icon: mapDot[c]});
 		marker.addTo(key);
-		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.925, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: false, icon: mapDot[c]});
+		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.925, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: true, icon: mapDot[c]});
 		marker.addTo(key);
-		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.93, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: false, icon: L.divIcon({className: 'mapKey', iconSize: [$(window).width()/10, $(window).height()/50], iconAnchor: [0, $(window).height()/100], html: keys[i]})});
+		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.93, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: true, icon: L.divIcon({className: 'mapKey', iconSize: [$(window).width()/10, $(window).height()/50], iconAnchor: [0, $(window).height()/100], html: keys[i]})});
 		marker.addTo(key);
 	}
 }
@@ -537,8 +535,8 @@ function resize() {
 		});
 		var unit = $(window).width()/16;
 	}
-	map.fitBounds([[28.5, 125], [45.5, 50]]);
-	setTimeout(addKey, 1000);
+	map.fitBounds([[78.5, 12], [-57.5, 12]]);
+	setTimeout(addKey, 100);
 }
 
 function getNewData() {
@@ -588,11 +586,11 @@ function getData(page) {
 }
 
 function setData(data, start) {
-	if (data.aggregations != undefined) {
+	if (data.records != undefined) {
 		colors = {};
 		for (var i = 0; i < colorOptions.length; i++) {
-			if (data.aggregations.by_classification.buckets[i] != undefined) {
-				colors[data.aggregations.by_classification.buckets[i].key] = colorOptions[i];
+			if (data.records[i] != undefined) {
+				colors[data.records[i].name] = colorOptions[i];
 			} else {
 				break;
 			}
@@ -607,11 +605,15 @@ function setData(data, start) {
 			timeline[data.records[i].date] = [];
 		}
 		timeline[data.records[i].date].push({
-			id: data.records[i].places, 
+			//id: data.records[i].places, 
+			id: data.records[i].order, 
 			caption: data.records[i].name, 
+			tooltip: (text("<em>" + data.records[i].name, true) + "<br /><em>"+text(data.records[i].latitude,true) + "<br /><em>" + text(data.records[i].longitude,true)),
+			popup: (text("<em>" + data.records[i].time,true) + "<br /><em>" + text(data.records[i].latitude,true) + "<br /><em>" + text(data.records[i].longitude,true)).trim(),
 			date: data.records[i].date,
-			color: getColor(data.records[i].time),
-			place: getPlace(data.records[i])
+			time: data.records[i].time,
+			color: getColor(data.records[i]),
+			place: data.records[i].places
 		});
 	}
 	if (start) {
@@ -626,10 +628,6 @@ function text(data, nocomma) {
 	return ((data != null)? (data + (nocomma? "" : ", ")) : "");
 }
 
-function image(data) {
-	return ((data != null)? "<img src=\"" + data + "\" alt=\"photograph of object\" draggable=\"false\" />" : "");
-}
-
 function getColor(data) {
 	var keys = Object.keys(colors);
 	for (var i = 0; i < keys.length; i++) {
@@ -641,23 +639,21 @@ function getColor(data) {
 }
 
 function getPlace(data) {
-	var fallBack = {name: undefined, geo: undefined};
-	if (data.records != undefined) {
+	var fallBack = {latLng: undefined};
+	if (data.places != undefined) {
 		var place;
-		for (var i = 0; i < data.records.length; i++) {
-			if (data.records[i].places == "Creation Place") {
+		for (var i = 0; i < data.places.length; i++) {
+			if (data.places[i] != undefined) {
 				place = {
-					name: data.records[i].name,
-					geo: data.records[i].places
+					latLng: data.places[i]
 				};
 				getGeo(place, data.records[i].places);
-			} else if (data.records[i] == "Find Spot") {
+			} else {
 				fallBack = {
-					name: data.records[i].name,
-					geo: data.records[i].places
+					latLng: data.places[i]
 				};
-				getGeo(place, data.records[i].places);
 			}
+			getGeo(place, data.records[i].places);
 		}
 		return ((place != undefined)? place : fallBack);
 	} else {
@@ -666,13 +662,13 @@ function getPlace(data) {
 }
 
 function getGeo(object,id) {
-	var placeURL = "http://localhost:8221/test_me/inden.json" + id + "?apikey=AIzaSyC-Duq7UvBK0FaPbOVwctQ9-7QZBxNdoIE";
+	var placeURL = "http://localhost:8221/test_me/inden.json";
 	var xmlrequest = new XMLHttpRequest();
 	
 	xmlrequest.onreadystatechange = function() {
 		if (this.readyState == 4) {
 			if (this.status == 200) {
-				object.geo = JSON.parse(this.responseText).geo;
+				object.latLng = JSON.parse(this.responseText).latLng;
 			} 
 		}
 	};
@@ -796,8 +792,11 @@ function textDate(date) {
 function addPoint(point, pane) {
 	var marker;
 	var latLon;
-	if (point.place.geo != undefined) {
-		latLon = L.latLng(point.place.geo.lat + 1 - (1*Math.random() + 1*Math.random()), point.place.geo.lon + 1 - (1*Math.random() + 1*Math.random()));
+	
+		console.log(point);
+
+	if (point.place != undefined) {
+		latLon = L.latLng(point.place[0].latitude + 1 - (1*Math.random() + 1*Math.random()), point.place[0].longitude + 1 - (1*Math.random() + 1*Math.random()));
 		marker = L.marker(latLon, {icon: mapDot[point.color], opacity: .5, pane: pane});
 	} else {
 		latLon = L.latLng(30 + (20/3*Math.random() + 20/3*Math.random() + 20/3*Math.random() - 10), -40 + (20/3*Math.random() + 20/3*Math.random() + 20/3*Math.random() - 10));
@@ -808,7 +807,7 @@ function addPoint(point, pane) {
 	var tooltip = L.tooltip({className: "tooltip"});
 	marker.bindTooltip(tooltip);
 	marker.setTooltipContent(point.place.name + "<br />" + point.tooltip);
-	var popup = L.popup({className: "tooltip", autoPan: false, closeButton: false});
+	var popup = L.popup({className: "tooltip", autoPan: true, closeButton: false});
 	popup.setContent(point.popup);
 	marker.bindPopup(popup);
 
