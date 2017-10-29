@@ -2,8 +2,8 @@
 var years = [2007,2008,2009,2010,2011,2012];
 
 var User1 = [04,08,13,13,03,03];
-var User2 = [06,18,12,11,07,06];
-var User3 = [03,09,06,06,05,03];
+var User2 = [06,18,10,12,07,06];
+var User3 = [03,09,06,05,05,03];
 var User4 = [03,05,05,02,05,02];
 
 var ctx = document.getElementById("myChart");
