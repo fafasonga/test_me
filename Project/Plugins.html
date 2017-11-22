@@ -15,7 +15,7 @@
     <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
     <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
     
-            <style> #map_418e5972c92e4717bcd4f626429c6574 {
+            <style> #map_e8aaec453ffa428d9b1c2b5f96ef4feb {
                 position : relative;
                 width : 100.0%;
                 height: 100.0%;
@@ -33,7 +33,7 @@
 </head>
 <body>    
     
-            <div class="folium-map" id="map_418e5972c92e4717bcd4f626429c6574" ></div>
+            <div class="folium-map" id="map_e8aaec453ffa428d9b1c2b5f96ef4feb" ></div>
         
 </body>
 <script>    
@@ -43,8 +43,8 @@
                 var bounds = null;
             
 
-            var map_418e5972c92e4717bcd4f626429c6574 = L.map(
-                                  'map_418e5972c92e4717bcd4f626429c6574',
+            var map_e8aaec453ffa428d9b1c2b5f96ef4feb = L.map(
+                                  'map_e8aaec453ffa428d9b1c2b5f96ef4feb',
                                   {center: [39.906098,116.206722],
                                   zoom: 16,
                                   maxBounds: bounds,
@@ -55,7 +55,7 @@
             
         
     
-            var tile_layer_9ca9e38012c544488a8186fdeee0dfad = L.tileLayer(
+            var tile_layer_f24041830b944cbcba40dd5ef97d96a5 = L.tileLayer(
                 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 {
   "attribution": null, 
@@ -65,24 +65,24 @@
   "noWrap": false, 
   "subdomains": "abc"
 }
-                ).addTo(map_418e5972c92e4717bcd4f626429c6574);
+                ).addTo(map_e8aaec453ffa428d9b1c2b5f96ef4feb);
         
     
-            map_418e5972c92e4717bcd4f626429c6574.timeDimension = L.timeDimension({period:"PT1M"});
-            map_418e5972c92e4717bcd4f626429c6574.timeDimensionControl = L.control.timeDimension({
+            map_e8aaec453ffa428d9b1c2b5f96ef4feb.timeDimension = L.timeDimension({period:"PT1M"});
+            map_e8aaec453ffa428d9b1c2b5f96ef4feb.timeDimensionControl = L.control.timeDimension({
                 position: 'bottomleft',
                 autoPlay: true,
                 playerOptions: {
                     transitionTime: 200,
                     loop: true}
                     });
-            map_418e5972c92e4717bcd4f626429c6574.addControl(map_418e5972c92e4717bcd4f626429c6574.timeDimensionControl);
+            map_e8aaec453ffa428d9b1c2b5f96ef4feb.addControl(map_e8aaec453ffa428d9b1c2b5f96ef4feb.timeDimensionControl);
 
-            var timestamped_geo_json_6e32494668d94e10abe4e61f7f83082d = L.timeDimension.layer.geoJson(
-                L.geoJson({"type": "FeatureCollection", "features": [{"geometry": {"type": "LineString", "coordinates": [[116.341816, 39.981849]]}, "type": "Feature", "properties": {"style": {"color": "red", "weight": 500}, "times": ["2007-06-02T00:00:00"]}}]}, {'style': function (feature) {
+            var timestamped_geo_json_80eea242bae547ffa580381c5c0542b5 = L.timeDimension.layer.geoJson(
+                L.geoJson({"type": "FeatureCollection", "features": [{"geometry": {"type": "LineString", "coordinates": [[116.206722, 39.906098], [116.206598, 39.906124]]}, "type": "Feature", "properties": {"style": {"color": "red", "weight": 5}, "times": ["2017-06-02T00:00:00", "2017-06-02T00:10:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.206598, 39.906124], [116.205999, 39.905923]]}, "type": "Feature", "properties": {"style": {"color": "blue", "weight": 5}, "times": ["2017-06-02T00:10:00", "2017-06-02T00:20:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.205999, 39.905923], [116.206066, 39.905823]]}, "type": "Feature", "properties": {"style": {"color": "green", "weight": 15}, "times": ["2017-06-02T00:20:00", "2017-06-02T00:30:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.206066, 39.905823], [116.206647, 39.906108]]}, "type": "Feature", "properties": {"style": {"color": "#FFFFFF", "weight": 5}, "times": ["2017-06-02T00:30:00", "2017-06-02T00:40:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.206647, 39.906108], [116.206678, 39.906077]]}, "type": "Feature", "properties": {"style": {"color": "yellow", "weight": 5}, "times": ["2017-06-02T00:50:00", "2017-06-02T01:00:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.206678, 39.906077], [116.206678, 39.905818]]}, "type": "Feature", "properties": {"style": {"color": "red", "weight": 5}, "times": ["2017-06-02T01:10:00", "2017-06-02T01:20:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.206678, 39.905818], [116.384631, 39.905664]]}, "type": "Feature", "properties": {"style": {"color": "blue", "weight": 5}, "times": ["2017-06-02T01:30:00", "2017-06-02T01:40:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.384631, 39.905664], [116.206233, 39.905921]]}, "type": "Feature", "properties": {"style": {"color": "yellow", "weight": 5}, "times": ["2017-06-02T01:50:00", "2017-06-02T02:00:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.206233, 39.905921], [116.385307, 39.904698]]}, "type": "Feature", "properties": {"style": {"color": "green", "weight": 5}, "times": ["2017-06-02T02:10:00", "2017-06-02T02:20:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.385307, 39.904698], [116.385279, 39.904856]]}, "type": "Feature", "properties": {"style": {"color": "green", "weight": 5}, "times": ["2017-06-02T02:30:00", "2017-06-02T02:40:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.385279, 39.904856], [116.385307, 39.904698]]}, "type": "Feature", "properties": {"style": {"color": "blue", "weight": 5}, "times": ["2017-06-02T02:50:00", "2017-06-02T03:00:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.385307, 39.904698], [116.206557, 39.906119]]}, "type": "Feature", "properties": {"style": {"color": "black", "weight": 5}, "times": ["2017-06-02T03:10:00", "2017-06-02T03:20:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.206557, 39.906119], [116.206352, 39.906194]]}, "type": "Feature", "properties": {"style": {"color": "red", "weight": 5}, "times": ["2017-06-02T03:30:00", "2017-06-02T03:40:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.206352, 39.906194], [116.206099, 39.906046]]}, "type": "Feature", "properties": {"style": {"color": "yellow", "weight": 5}, "times": ["2017-06-02T03:50:00", "2017-06-02T04:00:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.206099, 39.906046], [116.205977, 39.90588]]}, "type": "Feature", "properties": {"style": {"color": "green", "weight": 5}, "times": ["2017-06-02T04:10:00", "2017-06-02T04:20:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.205977, 39.90588], [116.206359, 39.905977]]}, "type": "Feature", "properties": {"style": {"color": "blue", "weight": 5}, "times": ["2017-06-02T04:30:00", "2017-06-02T04:40:00"]}}, {"geometry": {"type": "LineString", "coordinates": [[116.206359, 39.905977], [116.384583, 39.90569]]}, "type": "Feature", "properties": {"style": {"color": "white", "weight": 5}, "times": ["2017-06-02T04:50:00", "2017-06-02T05:00:00"]}}]}, {'style': function (feature) {
                     return feature.properties.style
                 }}),
                 {updateTimeDimension: true,addlastPoint: true}
-                ).addTo(map_418e5972c92e4717bcd4f626429c6574);
+                ).addTo(map_e8aaec453ffa428d9b1c2b5f96ef4feb);
         
 </script>
