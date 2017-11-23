@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Geolocation</title>
+<title>Harvard Art Museums</title>
 <style>
 body, html {
 	cursor: none;
@@ -280,7 +280,7 @@ body, html {
 	position: absolute;
 	top: calc(100% - 1px);
 	left: 50%;
-	border-width: .35vw;
+	border-width: .25vw;
 	border-style: solid;
 	border-color: #FFFFFF transparent transparent transparent;
 	padding: 0px;
@@ -340,10 +340,10 @@ var unknown = {};
 var timer;
 var restart;
 var nextDay = 100;
-var colorOptions = ["red", "green"];
-var colors = {"User 1": "green", "User 2": "red"};
+var colorOptions = ["red", "orange", "yellow", "green", "aqua", "blue", "purple", "pink"];
+var colors = {"Sculpture": "red", "Paintings": "yellow", "Drawings": "green", "Prints": "aqua", "Photographs": "purple", "Other": "white"};
 
-var url = "http://localhost:8221/test_me/inden.json";
+var url = "http://api.harvardartmuseums.org/object?apikey=f0ebae50-8589-11e6-8681-638bad7e2ec3&size=100&gallery=any&fields=id,gallery,places,title,classification,people,culture,dated,primaryimageurl";
 
 
 setup();
@@ -368,9 +368,15 @@ function clearData() {
 
 function setup() {
 	map = L.map('map', {
-		zoom: 8,
-  		center: L.latLng(39, 116)
-	})
+		attributionControl: true, 
+		zoomControl: true,
+		boxZoom: true,
+		doubleClickZoom: true,
+		dragging: true,
+		keyboard: true,
+		scrollWheelZoom: true,
+		zoomSnap: .000001,
+	}).setView([0, 0], 1)
 
 	currentMap = L.layerGroup().addTo(map);
 	key = L.layerGroup().addTo(map);
@@ -379,7 +385,7 @@ function setup() {
 
 	L.tileLayer('https://api.mapbox.com/styles/v1/glevyhas/cj0jrdqc2007s2sulnbam9wn9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2xldnloYXMiLCJhIjoiY2l6aW9xbG4zMDFmbjJxb2QxM2RzeGZ0dCJ9.9AcW-nQfq-vpFv_F3ptkGg').addTo(map);
 
-	L.control.attribution({position: 'topright', prefix: false}).addTo(map);
+	L.control.attribution({position: 'topright', prefix: false}).addAttribution('Leaflet | OpenStreetMap | Mapbox').addTo(map);
 
 	window.addEventListener("resize", resize);
 
@@ -481,11 +487,16 @@ function addKey() {
 	var y = pixelOrigin.y;
 	for (var i = 0; i < keys.length; i++) {
 		c = colors[keys[i]];
-		mapDot[c] = L.divIcon({className: ('mapDot ' + c), iconSize: [10, 10]});
+		mapDot[c] = L.divIcon({className: ('mapDot ' + c), iconSize: [3, 3]});
 		unknown[c] = L.divIcon({className: ('unknown'), html: ""});
-		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.925, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: true, icon: mapDot[c]});
+
+		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.925, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: false, icon: mapDot[c]});
 		marker.addTo(key);
-		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.93, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: true, icon: L.divIcon({className: 'mapKey', iconSize: [$(window).width()/10, $(window).height()/50], iconAnchor: [0, $(window).height()/100], html: keys[i]})});
+		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.925, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: false, icon: mapDot[c]});
+		marker.addTo(key);
+		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.925, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: false, icon: mapDot[c]});
+		marker.addTo(key);
+		marker = L.marker(map.wrapLatLng(map.layerPointToLatLng([$(window).width()*.93, $(window).height()*(.36 + .31*(i/keys.length))])), {interactive: false, icon: L.divIcon({className: 'mapKey', iconSize: [$(window).width()/10, $(window).height()/50], iconAnchor: [0, $(window).height()/100], html: keys[i]})});
 		marker.addTo(key);
 	}
 }
@@ -523,8 +534,8 @@ function resize() {
 		});
 		var unit = $(window).width()/16;
 	}
-	map.fitBounds([[37, 116.0], [40, 116.9]]); 
-	setTimeout(addKey, 100);
+	map.fitBounds([[78.5, 12], [-57.5, 12]]);
+	setTimeout(addKey, 1000);
 }
 
 function getNewData() {
@@ -547,7 +558,7 @@ function getNewData() {
 		}
 	};
 			
-	xmlrequest.open("GET", url, true);
+	xmlrequest.open("GET", url , true);
 	xmlrequest.send();
 }
 
@@ -574,29 +585,32 @@ function getData(page) {
 }
 
 function setData(data, start) {
-	if (data != undefined) {
+	if (data.aggregations != undefined) {
 		colors = {};
 		for (var i = 0; i < colorOptions.length; i++) {
-				colors[data.records[i].name] = colorOptions[i];
+			if (data.aggregations.by_classification.buckets[i] != undefined) {
+				colors[data.aggregations.by_classification.buckets[i].key] = colorOptions[i];
+			} else {
+				break;
+			}
 		}
-		colors["User 2"] = "red";
+		colors["Other"] = "white";
 		addKey();
 	}
 	for (var i = 0; i < data.records.length; i++) {
 		loaded++;
 		$("#loadingbar span").css("width", loaded/toLoad*100 + "%");
-		if (timeline[data.records[i].date] == undefined) {
-			timeline[data.records[i].date] = [];
+		if (timeline[data.records[i].gallery.begindate] == undefined) {
+			timeline[data.records[i].gallery.begindate] = [];
 		}
-		timeline[data.records[i].date].push({
-			id: data.records[i].order, 
-			caption: data.records[i].name, 
-			tooltip: text("<em>" + data.records[i].name, true) + "</em><br />Tap for more information",
-			popup: (text("<em>" + data.records[i].name,true) + "<br /><em>" + text(data.records[i].date,true) + "<br /><em>" + text(data.records[i].time,true)).trim(),
-			date: data.records[i].date,
-			time: data.records[i].time,
-			color: getColor(data.records[i].name),
-			place: data.records[i].places
+		timeline[data.records[i].gallery.begindate].push({
+			id: data.records[i].id, 
+			caption: data.records[i].gallery.name, 
+			tooltip: text("<em>" + data.records[i].title, true) + "</em><br />Tap for more information",
+			popup: (image(data.records[i].primaryimageurl) + "<br /><em>" + text(data.records[i].title, true) + "</em><br />" + text(getArtist(data.records[i])) + text(data.records[i].dated) + text(data.records[i].culture, true) + "<br />" + text(data.records[i].gallery.theme, true)).trim(),
+			date: data.records[i].gallery.begindate,
+			color: getColor(data.records[i].classification),
+			place: getPlace(data.records[i])
 		});
 	}
 	if (start) {
@@ -607,37 +621,56 @@ function setData(data, start) {
 	}
 }
 
+function getArtist(record) {
+	if (record.people == null) {
+		return null;
+	}
+	for (var i = 0; i < record.people.length; i++) {
+		if (record.people[i].role == "Artist") {
+			return record.people[i].displayname;
+		}
+	}
+	return null;
+}
+
 function text(data, nocomma) {
 	return ((data != null)? (data + (nocomma? "" : ", ")) : "");
 }
 
+function image(data) {
+	return ((data != null)? "<img src=\"" + data + "\" alt=\"photograph of object\" draggable=\"false\" />" : "");
+}
+
 function getColor(data) {
 	var keys = Object.keys(colors);
-	console.log(keys)
+	//console.log(data)
 	for (var i = 0; i < keys.length; i++) {
 		if (data == keys[i]) {
 			return colors[keys[i]];
 		}
 	}
-	return colors["User 2,3,4"];
+	return colors["Other"];
 }
 
 function getPlace(data) {
-	var fallBack = {latLng: undefined};
+	var fallBack = {name: undefined, geo: undefined};
 	if (data.places != undefined) {
 		var place;
 		for (var i = 0; i < data.places.length; i++) {
-			if (data.places[i] != undefined) {
+			if (data.places[i].type == "Creation Place") {
 				place = {
-					latLng: data.places[i]
+					name: data.places[i].displayname,
+					geo: undefined
 				};
-				getGeo(place, data.records[i].places);
-			} else {
+				getGeo(place, data.places[i].placeid);
+				console.log(place)
+			} else if (data.places[i].type == "Find Spot") {
 				fallBack = {
-					latLng: data.places[i]
+					name: data.places[i].displayname,
+					geo: undefined
 				};
+				getGeo(fallBack, data.places[i].placeid);
 			}
-			getGeo(place, data.records[i].places);
 		}
 		return ((place != undefined)? place : fallBack);
 	} else {
@@ -645,14 +678,14 @@ function getPlace(data) {
 	}
 }
 
-function getGeo(object,id) {
-	var placeURL = "http://localhost:8221/test_me/inden.json" + id + "?key=AIzaSyC-Duq7UvBK0FaPbOVwctQ9-7QZBxNdoIE";
+function getGeo(object, id) {
+	var placeURL = "http://api.harvardartmuseums.org/place/" + id + "?apikey=f0ebae50-8589-11e6-8681-638bad7e2ec3";
 	var xmlrequest = new XMLHttpRequest();
 	
 	xmlrequest.onreadystatechange = function() {
 		if (this.readyState == 4) {
 			if (this.status == 200) {
-				object.latLng = JSON.parse(this.responseText).latLng;
+				object.geo = JSON.parse(this.responseText).geo;
 			} 
 		}
 	};
@@ -776,16 +809,15 @@ function textDate(date) {
 function addPoint(point, pane) {
 	var marker;
 	var latLon;
-	
-		console.log(point);
 
-	if (point.place != undefined) {
-		latLon = L.latLng(point.place[0].latitude + 1 - (1*Math.random() + 1*Math.random()), point.place[0].longitude + 1 - (1*Math.random() + 1*Math.random()));
-		marker = L.marker(latLon, {icon: mapDot[point.color], opacity: .8, pane: pane});
-		//console.log(marker)
+      //console.log(point);
+
+	if (point.place.geo != undefined) {
+		latLon = L.latLng(point.place.geo.lat + 1 - (1*Math.random() + 1*Math.random()), point.place.geo.lon + 1 - (1*Math.random() + 1*Math.random()));
+		marker = L.marker(latLon, {icon: mapDot[point.color], opacity: .5, pane: pane});
 	} else {
 		latLon = L.latLng(30 + (20/3*Math.random() + 20/3*Math.random() + 20/3*Math.random() - 10), -40 + (20/3*Math.random() + 20/3*Math.random() + 20/3*Math.random() - 10));
-		marker = L.marker(latLon, {icon: mapDot[point.color], interactive: true, pane: pane});
+		marker = L.marker(latLon, {icon: unknown[point.color], interactive: false, pane: pane});
 		return marker;
 	}
 	
