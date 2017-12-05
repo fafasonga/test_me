@@ -1,0 +1,36 @@
+{
+  "name": "timelineproject",
+  "version": "1.0.0",
+  "description": "A map of objects as they enter the collection",
+  "main": "index.js",
+  "engines": {
+    "node": "7.10.1"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "socket.io": "^1.7.4"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "data",
+    "sonification",
+    "art"
+  ],
+  "author": "SONGA-Fabrice",
+  "license": "ISC",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fafasonga/test_me.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fafasonga/test_me/issues"
+  },
+  "homepage": "https://github.com/fafasonga/test_me#readme"
+}
